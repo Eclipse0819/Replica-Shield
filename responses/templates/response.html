@@ -77,6 +77,8 @@
 
         .textarea-field {
             resize: none;
+            padding-left: 5px;
+            padding-top: 5px;
             border-radius: 5px;
             min-height: 5em;
             width: 100%;
@@ -89,7 +91,7 @@
             border-radius: 5px;
             color: #ffffff;
             cursor: pointer;
-            width: 100%;
+            width: 30%;
         }
 
         .submit-button:hover {
@@ -116,26 +118,27 @@
         <h1 class="replica-shield-title">REPLICA SHIELD</h1>
         <form class="replica-shield-form" method="post">
             {% csrf_token %}
-            <label for="project-title" class="form-label">Enter Project Title</label>
+
+            <label for="title" class="form-label">Enter Project Title</label>
             <div class="title-input">
-                <input type="text" id="project-title" class="input-field" placeholder="Project Title" required>
+                {{form.title}}
+            </div>
+
+            <label for="team-leader-email" class="form-label">Team Leader Details</label>
+            <div class="leader-input">
+                {{form.leader}}
+                {{form.leader_email}}
             </div>
 
             <label for="project-team" class="form-label">Project Team</label>
             <div class="form-label">
-                <input type="text" id="project-team" class="input-field" placeholder="Project Team" required>
-                <input type="text" id="project-team" class="input-field" placeholder="Project Team" required>
-                <input type="text" id="project-team" class="input-field" placeholder="Project Team" required>
+                {{form.member2}}
+                {{form.member3}}
+                {{form.member4}}
             </div>
 
-            <label for="team-leader-email" class="form-label">Team Leader's email</label>
-            <div class="leader-input">
-                <input type="email" id="team-leader-email" class="input-field" placeholder="Team Leader's email"
-                    required>
-            </div>
-
-            <label for="project-abstract" class="form-label">Enter Project Abstract</label>
-            <textarea id="project-abstract" class="textarea-field" placeholder="Project Abstract" required></textarea>
+            <label for="abstract" class="form-label">Enter Project Abstract</label>
+            {{form.abstract}}
 
             <button type="submit" class="submit-button">Submit Response</button>
         </form>
