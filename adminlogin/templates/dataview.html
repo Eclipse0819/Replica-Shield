@@ -1,4 +1,13 @@
-
+<ul>
 {% for response in responses %}
-    <p>{{response}}</p>
+    <li>
+        <p>{{response.title}}</p>
+        <p>{{response.leader}}</p>
+        <p>{{response.leader_email}}</p>
+        <p>{{response.member2}}</p>
+        <p>{{response.member3}}</p>
+        <p>{{response.member4}}</p>
+        <p>{{response.abstract}}</p>
+    </li>
 {% endfor %}
+</ul>
