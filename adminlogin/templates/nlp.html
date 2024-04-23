@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<html>
+    <ul>
+        {% for project in cluster_data %}
+        <li>
+            Project {{project.project}} belongs to cluster {{project.cluster_label}}
+        </li>
+        {% endfor %}
+    </ul>
+</html>
