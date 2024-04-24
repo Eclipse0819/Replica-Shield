@@ -2,6 +2,7 @@ from django.shortcuts import render
 from responses.models import Response
 from django.contrib.auth.decorators import login_required
 from . import utils
+from collections import defaultdict
 
 @login_required
 def profile_view(request):
@@ -36,8 +37,14 @@ def gen_duplicates(request):
     dbscan = utils.DBSCAN(eps=epsilon, min_samples=min_samples, metric='precomputed')
     clusters = dbscan.fit_predict(distance_matrix)
 
-    cluster_data = []
+    titles = Response.objects.values_list('title', flat=True)
+
+    cluster_project_lists = defaultdict(list)
     for i, cluster_label in enumerate(clusters):
-        cluster_data.append({'project': i, 'cluster_label': cluster_label})
+        project_title = titles[i]
+        cluster_project_lists[cluster_label].append(project_title)
+
+    cluster_data = [{'cluster_label': label, 'projects': projects} for label, projects in cluster_project_lists.items()]
+
 
     return render(request, 'nlp.html', {'cluster_data': cluster_data})
